@@ -4,7 +4,21 @@ import App from "./App";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-const reducer = (state = { data: {}, filtred: false }, action) => {
+const iconState = {
+  btc: "https://profinvestment.com/wp-content/plugins/coin-market-cap/assets/coins-logos/bitcoin.svg",
+  eth: "https://profinvestment.com/wp-content/plugins/coin-market-cap/assets/coins-logos/ethereum.svg",
+  bnb: "https://profinvestment.com/wp-content/plugins/coin-market-cap/assets/coins-logos/binancecoin.svg",
+  bch: "https://assets.coingecko.com/coins/images/7451/large/GZZkGaIh_400x400.jpg",
+  ada: "https://profinvestment.com/wp-content/plugins/coin-market-cap/assets/coins-logos/cardano.svg",
+  xrp: "https://profinvestment.com/wp-content/plugins/coin-market-cap/assets/coins-logos/ripple.svg",
+  sol: "https://assets.coingecko.com/coins/images/4128/large/coinmarketcap-solana-200.png",
+  dot: "https://profinvestment.com/wp-content/plugins/coin-market-cap/assets/coins-logos/polkadot.svg",
+};
+
+const reducer = (
+  state = { data: {}, filtred: false, icon: iconState },
+  action
+) => {
   switch (action.type) {
     case "LIKED":
       return { ...state, filtred: true };

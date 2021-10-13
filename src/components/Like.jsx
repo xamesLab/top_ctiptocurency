@@ -10,9 +10,8 @@ const LikeButton = ({cur}) => {
     }
 
     return (
-        <div className=''>
-            <button onClick={toggleLike}>like</button>
-                    {isLike?'ok':'dis'}
+        <div onClick={toggleLike} className='main__like'>
+            <img src={isLike?"static/love-true2.png":"static/love.png"} alt="like"></img>
         </div>
     )
 }

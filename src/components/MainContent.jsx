@@ -9,6 +9,7 @@ const MainContent = () => {
     
     const dispatch = useDispatch()
     const data = useSelector(state => state)
+    const icon = useSelector(state => state.icon)
 
     const getData = async function(cur){
         const client = Binance();
@@ -45,9 +46,20 @@ const MainContent = () => {
                     {
                     topList.map(i => (
                         <div className='main__card' key={i}>
-                            <LikeButton cur={i}/>
+                            <div className='card__title'>
+                                <h2>{ `${i.toUpperCase()}/USDT` }</h2>
+                            </div>
+                            <div className='card__icon'>
+                                <img src={`${icon[i]}`} alt="icon" />
+                            </div>
+                            <p>Последняя цена:</p>
                             {data.data[i]?.val}
-                            <button onClick={() => delHandler(i)}>Удалить</button>
+                            <div className='main__buttons'>
+                                <LikeButton cur={i}/>
+                                <div className='main__del_btn' onClick={() => delHandler(i)}>
+                                    <img src="static/close.png" alt="del" />
+                                </div>
+                            </div>
                         </div>
                     ))
                 }
@@ -56,9 +68,20 @@ const MainContent = () => {
                 {
                 isLikedList.map(i => (
                     <div className='main__card' key={i}>
-                        <LikeButton cur={i}/>
-                        {data.data[i].val}
-                        <button onClick={() => delHandler(i)}>Удалить</button>
+                        <div className='card__title'>
+                            <h2>{ `${i.toUpperCase()}/USDT` }</h2>
+                        </div>
+                        <div className='card__icon'>
+                            <img src={`${icon[i]}`} alt="icon" />
+                        </div>
+                        <p>Последняя цена:</p>
+                        {data.data[i]?.val}
+                        <div className='main__buttons'>
+                            <LikeButton cur={i}/>
+                            <div className='main__del_btn' onClick={() => delHandler(i)}>
+                                <img src="static/close.png" alt="del" />
+                            </div>
+                        </div>
                     </div>
                 ))
             }
