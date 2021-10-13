@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    height: 50px;
+    width: 100vw;
+    background-color: blueviolet;
+}
+
+.header__content {
+    max-width: 1170px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main {
+    max-width: 1170px;
+    margin: auto;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.main__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
