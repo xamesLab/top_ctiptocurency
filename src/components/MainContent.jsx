@@ -5,6 +5,7 @@ import LikeButton from "./Like";
 
 const MainContent = () => {
     const [topList, setTopList] = useState(['btc', 'eth', 'bnb', 'bch', 'ada', 'xrp', 'sol', 'dot'])
+    const [isLikedList, setIsLikedList] = useState([])
     
     const dispatch = useDispatch()
     const data = useSelector(state => state)
@@ -29,23 +30,39 @@ const MainContent = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        setIsLikedList(topList.filter(i => data.data[i]?.like))
+    },[data.filtred, data.data, topList])
+
     const delHandler = (el) => {
-        console.log(el)
         setTopList(topList.filter(i=>i!==el))
     }
 
-    
-
     return (
-        <div className='main'>
-            {topList.map(i => (
-                <div className='main__card' key={i}>
-                    <LikeButton/>
-                    {data[i]}
-                    <button onClick={()=>delHandler(i)}>Удалить</button>
-                </div>
-            ))}
-            
+        <div>
+            {!data.filtred ?
+                <div className='main'>
+                    {
+                    topList.map(i => (
+                        <div className='main__card' key={i}>
+                            <LikeButton cur={i}/>
+                            {data.data[i]?.val}
+                            <button onClick={() => delHandler(i)}>Удалить</button>
+                        </div>
+                    ))
+                }
+                </div> :
+                <div className='main'>
+                {
+                isLikedList.map(i => (
+                    <div className='main__card' key={i}>
+                        <LikeButton cur={i}/>
+                        {data.data[i].val}
+                        <button onClick={() => delHandler(i)}>Удалить</button>
+                    </div>
+                ))
+            }
+            </div>}
         </div>
     )
 }

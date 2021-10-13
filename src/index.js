@@ -4,12 +4,36 @@ import App from "./App";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-const defaultState = {};
-
-const reducer = (state = defaultState, action) => {
+const reducer = (state = { data: {}, filtred: false }, action) => {
   switch (action.type) {
+    case "LIKED":
+      return { ...state, filtred: true };
+    case "ALL":
+      return { ...state, filtred: false };
     case "SET":
-      return { ...state, [action.cur]: action.data };
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          [action.cur]: { ...state.data[action.cur], val: action.data },
+        },
+      };
+    case "LIKE":
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          [action.cur]: { ...state.data[action.cur], like: true },
+        },
+      };
+    case "DISLIKE":
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          [action.cur]: { ...state.data[action.cur], like: false },
+        },
+      };
 
     default:
       return state;
